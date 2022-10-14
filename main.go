@@ -19,7 +19,6 @@ var (
 func getFans(mid, cookie string, ps, pn int) (fanList []string) {
 	fanList = make([]string, 0, 1000)
 	url := fmt.Sprintf(followURL, mid, ps, pn)
-	fmt.Println(url)
 	method := "GET"
 
 	client := &http.Client{}
@@ -44,7 +43,6 @@ func getFans(mid, cookie string, ps, pn int) (fanList []string) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(string(body))
 	gjson.ParseBytes(body).Get("data.list").ForEach(func(_, v gjson.Result) bool {
 		fanList = append(fanList, v.Get("mid").String())
 		return true
